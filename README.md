@@ -16,3 +16,9 @@ Esta guía fue creada con el objetivo de **democratizar el conocimiento DevOps**
 
 ```text
 [1. Fundamentos] ──> [2. Linux & Redes] ──> [3. CI/CD & Containers] ──> [4. Cloud & IaC] ──> [5. Observabilidad]
+
+## Autor
+Miguel Angel Ibarra Navarro
+Ingeniero DevOps | Maestro en Educación
+Rosarito,, México.
+🔗 LinkedIn Profile | 💻 GitHub Profile
