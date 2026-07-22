@@ -21,6 +21,5 @@ Esta guía fue creada con el objetivo de **democratizar el conocimiento DevOps**
 ## Autor
 # Miguel Angel Ibarra Navarro
 **DevOps Engineer | M.Ed.**
-📍 Rosarito, Baja California, Mexico
 💼 [LinkedIn](https://www.linkedin.com/in/miguelangelibarranavarro)  
 💻 [GitHub](https://github.com/ibnami)
