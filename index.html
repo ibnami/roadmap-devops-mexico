@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevOps Zero-to-Hero | Curso Interactivo Gratuito</title>
-    
+    <title>DevOps Accelerator: De Cero a Nada de Producción</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -18,19 +18,19 @@
 <body class="bg-slate-950 text-slate-100 antialiased min-h-screen flex flex-col" x-data="courseApp()">
 
     <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+        <div class="max-w-7xl mx-auto px-4 py-3.5 flex justify-between items-center">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-emerald-400 flex items-center justify-center font-black text-slate-950 text-lg shadow-lg shadow-indigo-500/20">
-                    🚀
+                    ⚙️
                 </div>
                 <div>
-                    <h1 class="font-bold text-white text-base leading-none">DevOps Junior Accelerator</h1>
-                    <p class="text-xs text-slate-400 mt-1">Por Miguel Ibarra · M.Ed & Senior DevOps</p>
+                    <h1 class="font-bold text-white text-base leading-none">DevOps Accelerator</h1>
+                    <p class="text-xs text-slate-400 mt-1">Por Miguel Angel Ibarra Navarro | M.Ed & Senior DevOps Engineer</p>
                 </div>
             </div>
 
             <div class="hidden md:flex items-center gap-4 bg-slate-950 border border-slate-800 px-4 py-2 rounded-full">
-                <span class="text-xs text-slate-400 font-medium">Progreso del Curso:</span>
+                <span class="text-xs text-slate-400 font-medium">Avance del Proyecto:</span>
                 <div class="w-32 bg-slate-800 h-2 rounded-full overflow-hidden">
                     <div class="bg-gradient-to-r from-indigo-500 to-emerald-400 h-full transition-all duration-300" :style="`width: ${progressPercentage}%`"></div>
                 </div>
@@ -43,7 +43,7 @@
         
         <aside class="lg:col-span-4 xl:col-span-3 space-y-3">
             <div class="bg-slate-900/50 border border-slate-800/80 rounded-2xl p-4 sticky top-20">
-                <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4 px-2">Módulos del Curso</h2>
+                <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4 px-2">Fases del Proyecto Real</h2>
                 <nav class="space-y-1">
                     <template x-for="(module, index) in modules" :key="module.id">
                         <button 
@@ -68,43 +68,51 @@
         </aside>
 
         <main class="lg:col-span-8 xl:col-span-9 space-y-6">
-            
             <template x-if="modules[currentModule]">
                 <div class="bg-slate-900/60 border border-slate-800 rounded-3xl p-6 md:p-8 space-y-8 backdrop-blur-sm shadow-xl">
                     
                     <div class="border-b border-slate-800 pb-6">
                         <div class="flex items-center gap-2 mb-2">
-                            <span class="px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold" x-text="`Módulo ${currentModule + 1}`"></span>
+                            <span class="px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold" x-text="`Fase ${currentModule + 1}`"></span>
                             <span class="text-xs text-slate-500" x-text="modules[currentModule].duration"></span>
                         </div>
                         <h2 class="text-2xl md:text-3xl font-extrabold text-white" x-text="modules[currentModule].title"></h2>
                         <p class="text-slate-400 text-sm mt-2 leading-relaxed" x-text="modules[currentModule].description"></p>
                     </div>
 
+                    <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-5 space-y-2">
+                        <div class="flex items-center gap-2 text-indigo-400 font-bold text-sm">
+                            <i data-lucide="wrench" class="w-4 h-4"></i>
+                            <span>Prerrequisitos y Configuración Inicial</span>
+                        </div>
+                        <p class="text-slate-300 text-xs leading-relaxed" x-html="modules[currentModule].prerequisites"></p>
+                    </div>
+
                     <div class="bg-indigo-950/30 border border-indigo-800/40 rounded-2xl p-5 space-y-2">
                         <div class="flex items-center gap-2 text-indigo-400 font-bold text-sm">
-                            <i data-lucide="lightbulb" class="w-4 h-4"></i>
-                            <span>El concepto en simple (Sin Rodeos)</span>
+                            <i data-lucide="book-open" class="w-4 h-4"></i>
+                            <span>Fundamento Técnico Explicado</span>
                         </div>
-                        <p class="text-slate-300 text-sm leading-relaxed" x-html="modules[currentModule].analogy"></p>
+                        <p class="text-slate-300 text-sm leading-relaxed" x-html="modules[currentModule].concept"></p>
                     </div>
 
                     <div class="space-y-4">
                         <h3 class="text-lg font-bold text-white flex items-center gap-2">
                             <i data-lucide="terminal" class="w-5 h-5 text-emerald-400"></i>
-                            <span>Laboratorio Práctico</span>
+                            <span>Paso a Paso del Laboratorio</span>
                         </h3>
                         
                         <div class="space-y-4">
                             <template x-for="(step, sIndex) in modules[currentModule].steps" :key="sIndex">
                                 <div class="bg-slate-950 border border-slate-800/80 rounded-xl p-4 space-y-3">
-                                    <p class="text-xs font-semibold text-slate-300" x-text="`${sIndex + 1}. ${step.instruction}`"></p>
+                                    <p class="text-xs font-bold text-white" x-text="`${sIndex + 1}. ${step.title}`"></p>
+                                    <p class="text-xs text-slate-400" x-text="step.explanation"></p>
                                     <template x-if="step.code">
-                                        <div class="relative group">
-                                            <pre class="bg-slate-900 text-emerald-300 p-3 rounded-lg text-xs overflow-x-auto border border-slate-800"><code x-text="step.code"></code></pre>
+                                        <div class="relative">
+                                            <pre class="bg-slate-900 text-emerald-300 p-3.5 rounded-lg text-xs overflow-x-auto border border-slate-800 leading-relaxed"><code x-text="step.code"></code></pre>
                                         </div>
                                     </template>
-                                    <p class="text-xs text-slate-500 italic" x-text="`💡 Resultado esperado: ${step.expected}`"></p>
+                                    <p class="text-xs text-slate-500 italic" x-text="`✓ Confirmación de éxito: ${step.validation}`"></p>
                                 </div>
                             </template>
                         </div>
@@ -112,8 +120,8 @@
 
                     <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-6 space-y-4">
                         <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
-                            <span>Comprobación de Conocimiento</span>
+                            <i data-lucide="help-circle" class="w-4 h-4 text-emerald-400"></i>
+                            <span>Validación de Aprendizaje</span>
                         </h3>
                         <p class="text-xs text-slate-400" x-text="modules[currentModule].quiz.question"></p>
                         
@@ -135,7 +143,7 @@
                     <div class="border-t border-slate-800 pt-6 space-y-3">
                         <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
                             <i data-lucide="compass" class="w-4 h-4 text-indigo-400"></i>
-                            <span>¿Quieres profundizar más en este tema? (Ruta Senior)</span>
+                            <span>Siguientes Pasos (Para profundizar como Senior)</span>
                         </h3>
                         <ul class="list-disc list-inside text-xs text-slate-400 space-y-1 pl-1">
                             <template x-for="item in modules[currentModule].nextSteps" :key="item">
@@ -149,7 +157,7 @@
                             @click="toggleComplete(modules[currentModule].id)"
                             :class="completedModules.includes(modules[currentModule].id) ? 'bg-slate-800 text-slate-400 border-slate-700' : 'bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold shadow-lg shadow-emerald-500/20'"
                             class="px-6 py-3 rounded-xl border text-xs transition-all flex items-center gap-2">
-                            <span x-text="completedModules.includes(modules[currentModule].id) ? 'Marcar como Incompleto' : '¡Completar y Guardar Progreso!'"></span>
+                            <span x-text="completedModules.includes(modules[currentModule].id) ? 'Marcar Módulo como Incompleto' : 'Completar Módulo y Guardar Progreso'"></span>
                         </button>
                     </div>
 
@@ -159,19 +167,19 @@
     </div>
 
     <footer class="border-t border-slate-800 bg-slate-950 py-6 text-center text-xs text-slate-500 mt-auto">
-        <p>© 2026 DevOps Junior Accelerator — Diseñado con metodología pedagógica por <strong>Miguel Ibarra</strong>.</p>
-        <p class="text-slate-600 mt-1">Alojado gratuitamente en GitHub Pages · Formando talento técnico en México y Latinoamérica.</p>
+        <p>© 2026 DevOps Accelerator — Diseñado con rigor pedagógico por <strong>Miguel Ibarra</strong>.</p>
+        <p class="text-slate-600 mt-1">Alojado en GitHub Pages · Un proyecto continuo de código, contenedores e infraestructura.</p>
     </footer>
 
     <script>
         document.addEventListener('alpine:init', () => {
-            Lucide.createIcons();
+            lucide.createIcons();
         });
 
         function courseApp() {
             return {
                 currentModule: 0,
-                completedModules: JSON.parse(localStorage.getItem('devops_completed') || '[]'),
+                completedModules: JSON.parse(localStorage.getItem('devops_acc_completed') || '[]'),
                 quizAnswer: null,
                 quizFeedback: '',
                 isQuizCorrect: false,
@@ -185,10 +193,10 @@
                     const correct = this.modules[this.currentModule].quiz.correct;
                     if (index === correct) {
                         this.isQuizCorrect = true;
-                        this.quizFeedback = '¡Correcto! Has captado la idea clave.';
+                        this.quizFeedback = '¡Correcto! Entiendes la interacción técnica del paso.';
                     } else {
                         this.isQuizCorrect = false;
-                        this.quizFeedback = 'Incorrecto. Revisa el concepto arriba e inténtalo de nuevo.';
+                        this.quizFeedback = 'Incorrecto. Revisa el código y la explicación del módulo.';
                     }
                 },
 
@@ -198,113 +206,208 @@
                     } else {
                         this.completedModules.push(id);
                     }
-                    localStorage.setItem('devops_completed', JSON.stringify(this.completedModules));
+                    localStorage.setItem('devops_acc_completed', JSON.stringify(this.completedModules));
                 },
 
                 modules: [
                     {
                         id: 'm1',
-                        title: '1. Linux & Terminal para la Automatización',
+                        title: '1. Linux, Terminal y la Aplicación Base',
                         duration: '45 min',
-                        description: 'Fundamentos de la línea de comandos sin miedo. Todo el software del mundo corre en servidores Linux.',
-                        analogy: 'Piensa en la terminal como chatear directamente con el motor de la computadora sin la interfaz gráfica estorbando. En lugar de hacer 10 clics, ejecutas una instrucción directa.',
+                        description: 'Aprenderás a interactuar con el sistema operativo sin interfaz gráfica y construirás la aplicación en Python que llevaremos hasta producción.',
+                        prerequisites: 'Abre la aplicación <strong>Terminal</strong> en macOS/Linux o <strong>PowerShell / WSL</strong> en Windows. Si usas Windows, asegúrate de tener Python 3 instalado tecleando <code>python --version</code> o <code>python3 --version</code>.',
+                        concept: 'Los servidores en producción no tienen mouse ni pantallas. Todo se controla mediante comandos textuales. Construiremos una aplicación ligera en Python y un script en Bash para validar que está funcionando.',
                         steps: [
-                            { instruction: 'Crea una carpeta de proyecto y entra en ella desde la terminal:', code: 'mkdir mi-proyecto && cd mi-proyecto', expected: 'Tu terminal ahora estará ubicada dentro de "mi-proyecto".' },
-                            { instruction: 'Crea un archivo de texto con contenido en una sola línea:', code: 'echo "Servidor activo v1.0" > estado.txt', expected: 'Se creará el archivo estado.txt silenciosamente.' },
-                            { instruction: 'Lee el contenido del archivo:', code: 'cat estado.txt', expected: 'Verás en pantalla: "Servidor activo v1.0".' }
+                            {
+                                title: 'Crear el directorio de trabajo aislado',
+                                explanation: 'Generamos una carpeta dedicada para nuestro proyecto y nos posicionamos dentro de ella.',
+                                code: 'mkdir -p ~/proyecto-devops && cd ~/proyecto-devops',
+                                validation: 'Al ejecutar "pwd", verás la ruta completa terminada en /proyecto-devops.'
+                            },
+                            {
+                                title: 'Escribir el código de la aplicación web (app.py)',
+                                explanation: 'Usaremos Python puro sin librerías externas para evitar problemas de instalación. Este script levanta un servidor HTTP en el puerto 8000 que responde con un mensaje JSON.',
+                                code: 'cat << \'EOF\' > app.py\nimport http.server\nimport socketserver\n\nPORT = 8000\nHandler = http.server.SimpleHTTPRequestHandler\n\nprint(f"Servidor iniciado en el puerto {PORT}")
+with socketserver.TCPServer(("", PORT), Handler) as httpd:
+    httpd.serve_forever()\nEOF',
+                                validation: 'Ejecuta "ls -la" y verás el archivo app.py creado con un tamaño superior a 0 bytes.'
+                            },
+                            {
+                                title: 'Crear el script de prueba de salud (check.sh)',
+                                explanation: 'En DevOps, la automatización requiere verificar si un servicio responde. Este script usará "curl" para consultar la aplicación.',
+                                code: 'cat << \'EOF\' > check.sh\n#!/bin/bash\nRESPONSE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8000)\nif [ "$RESPONSE" -eq 200 ]; then\n  echo "EXITO: La aplicacion responde correctamente (HTTP 200)"\n  exit 0\nelse\n  echo "ERROR: Se esperaba HTTP 200 pero se obtuvo $RESPONSE"\n  exit 1\nfi\nEOF\nchmod +x check.sh',
+                                validation: 'El comando "chmod +x" le da permisos de ejecución al script Bash.'
+                            }
                         ],
                         quiz: {
-                            question: '¿Qué comando usas para crear una carpeta y moverte dentro de ella?',
-                            options: ['mkdir carpeta && cd carpeta', 'create carpeta && move carpeta', 'echo carpeta > cd'],
-                            correct: 0
+                            question: '¿Por qué añadimos "chmod +x check.sh" al script en Linux/Bash?',
+                            options: [
+                                'Para compilar el código de Python a binario',
+                                'Para otorgarle permisos de ejecución como programa al archivo',
+                                'Para subir el archivo automáticamente a un servidor en la nube'
+                            ],
+                            correct: 1
                         },
                         nextSteps: [
-                            'Aprende sobre permisos de archivos (chmod, chown).',
-                            'Investiga la manipulación de flujos de texto avanzados con grep, sed y awk.',
-                            'Lectura sugerida: "The Linux Command Line" de William Shotts.'
+                            'Aprende sobre permisos POSIX avanzados (chmod 755, chown, grupos de usuario).',
+                            'Explora el manejo de variables de entorno en Bash utilizando export APP_ENV=production.',
+                            'Investiga redirección de flujos estándar en Linux (stdout, stderr, >, >>, 2>&1).'
                         ]
                     },
                     {
                         id: 'm2',
-                        title: '2. Empaquetado con Docker (Contenedores)',
+                        title: '2. Empaquetado en Contenedor con Docker',
                         duration: '60 min',
-                        description: 'Elimina para siempre el "en mi computadora sí funcionaba". Empaca tu aplicación con todas sus dependencias.',
-                        analogy: 'Un contenedor es como un contenedor de barco real: no importa qué tenga adentro (bananas, autos, ropa), el barco (servidor) solo sabe cómo cargarlo y moverlo de forma estándar.',
+                        description: 'Empaquetaremos la aplicación creada en el Módulo 1 dentro de una imagen Docker reproducible en cualquier servidor.',
+                        prerequisites: 'Necesitas **Docker Desktop** (Mac/Windows) o **Docker Engine** (Linux). Verifica que el servicio esté corriendo ejecutando <code>docker info</code> en tu terminal. Si indica comando no encontrado, instálalo desde docker.com.',
+                        concept: 'Un contenedor aísla la aplicación y sus dependencias del sistema operativo anfitrión. No importa si el servidor corre Ubuntu, Debian o RedHat: si tiene Docker, tu aplicación funcionará exactamente igual.',
                         steps: [
-                            { instruction: 'Descarga y corre un servidor web NGINX básico en segundos:', code: 'docker run -d -p 8080:80 --name mi-web nginx', expected: 'Docker descargará la imagen y ejecutará el servidor.' },
-                            { instruction: 'Verifica los contenedores activos en tu sistema:', code: 'docker ps', expected: 'Verás el contenedor "mi-web" corriendo en el puerto 8080.' },
-                            { instruction: 'Detén y elimina el contenedor de prueba:', code: 'docker stop mi-web && docker rm mi-web', expected: 'El contenedor se apaga y se limpia el sistema.' }
+                            {
+                                title: 'Escribir el Dockerfile',
+                                explanation: 'El Dockerfile es la receta paso a paso para construir la imagen. Usamos la imagen oficial de Python en versión ligera (slim).',
+                                code: 'cat << \'EOF\' > Dockerfile\nFROM python:3.11-slim\nWORKDIR /app\nCOPY app.py .\nEXPOSE 8000\nCMD ["python", "app.py"]\nEOF',
+                                validation: 'Verifica la existencia del archivo con "cat Dockerfile".'
+                            },
+                            {
+                                title: 'Construir la imagen de Docker',
+                                explanation: 'El comando "build" lee el Dockerfile del directorio actual (.) y asigna una etiqueta (-t) llamada "mi-app:v1".',
+                                code: 'docker build -t mi-app:v1 .',
+                                validation: 'Ejecuta "docker images" y confirma que "mi-app" aparece listada con el tag "v1".'
+                            },
+                            {
+                                title: 'Ejecutar el contenedor mapeando puertos',
+                                explanation: 'Iniciamos el contenedor en segundo plano (-d), nombrandolo "servicio-web" y mapeando el puerto 8080 de tu computadora al puerto 8000 del contenedor.',
+                                code: 'docker run -d -p 8080:8000 --name servicio-web mi-app:v1',
+                                validation: 'Ejecuta "docker ps". Verás el contenedor corriendo con el estado "Up".'
+                            },
+                            {
+                                title: 'Probar la aplicación dentro del contenedor',
+                                explanation: 'Ejecutamos una consulta curl a través del puerto mapeado 8080.',
+                                code: 'curl -I http://localhost:8080',
+                                validation: 'Verás la respuesta del encabezado del servidor indicando HTTP/1.0 200 OK.'
+                            }
                         ],
                         quiz: {
-                            question: '¿Cuál es la principal ventaja de un contenedor Docker?',
-                            options: ['Que hace que el internet vaya más rápido', 'Que empaqueta la app con sus dependencias para correr igual en cualquier lado', 'Que reemplaza por completo a los lenguajes de programación'],
+                            question: 'En el comando "docker run -d -p 8080:8000", ¿qué significa la bandera -p 8080:8000?',
+                            options: [
+                                'Asigna 8080 megabytes de memoria RAM al puerto 8000',
+                                'Conecta el puerto 8080 de la máquina anfitriona con el puerto 8000 interno del contenedor',
+                                'Pausa la ejecución del contenedor durante 8080 milisegundos'
+                            ],
                             correct: 1
                         },
                         nextSteps: [
-                            'Aprende a escribir tu propio Dockerfile para aplicaciones en Python o Node.js.',
-                            'Explora Docker Compose para levantar base de datos + app en un solo comando.',
-                            'Documentación oficial: docs.docker.com/get-started'
+                            'Explora el archivo .dockerignore para evitar copiar archivos innecesarios a la imagen.',
+                            'Investiga las construcciones multietapa (Multi-stage builds) para reducir el tamaño final de la imagen.',
+                            'Practica con Docker Compose para gestionar aplicaciones multicapa (ej. App Python + Base de Datos PostgreSQL).'
                         ]
                     },
                     {
                         id: 'm3',
-                        title: '3. CI/CD con GitHub Actions',
+                        title: '3. Integración Continua (CI) con GitHub Actions',
                         duration: '50 min',
-                        description: 'Automatiza el proceso de probar tu código e integrarlo cada vez que haces un cambio en GitHub.',
-                        analogy: 'CI/CD es como una banda transportadora en una fábrica automotriz. Cada vez que pones una pieza (código), robots automatizados revisan que no tenga fallas antes de poner el auto a rodar.',
+                        description: 'Automatizaremos la construcción de la imagen Docker y la ejecución de pruebas de salud cada vez que alguien envíe cambios de código.',
+                        prerequisites: 'Debes tener una cuenta en **GitHub** y haber subido la carpeta <code>proyecto-devops</code> a un repositorio público o privado usando <code>git init</code>, <code>git add .</code>, <code>git commit</code> y <code>git push</code>.',
+                        concept: 'La Integración Continua (CI) valida automáticamente que cada cambio introducido por un desarrollador no rompa la aplicación en producción. Si las pruebas fallan, el código no se integra.',
                         steps: [
-                            { instruction: 'Crea la estructura de carpetas necesaria en tu repositorio:', code: 'mkdir -p .github/workflows', expected: 'Carpeta lista para recibir tus flujos automatizados.' },
-                            { instruction: 'Crea un archivo llamado hello.yml dentro de esa carpeta con este contenido:', code: 'name: Mi Primer CI\non: [push]\njobs:\n  saludo:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo "¡Pipeline ejecutado con éxito!"', expected: 'Cada push a GitHub ejecutará este flujo automáticamente.' }
+                            {
+                                title: 'Crear la estructura de carpetas para los Workflows',
+                                explanation: 'GitHub Actions busca archivos YAML exclusivamente dentro de la ruta `.github/workflows`.',
+                                code: 'mkdir -p .github/workflows',
+                                validation: 'Verifica la ruta con "ls -la .github/workflows".'
+                            },
+                            {
+                                title: 'Definir el Pipeline de Integración Continua (ci.yml)',
+                                explanation: 'Este workflow descarga el código, instala Docker en la máquina virtual de GitHub, construye la imagen de la app y ejecuta el script de prueba.',
+                                code: 'cat << \'EOF\' > .github/workflows/ci.yml\nname: Pipeline de Integracion Continua\n\non:\n  push:\n    branches: [ "main", "master" ]\n\njobs:\n  build-and-test:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Descargar codigo del repositorio\n        uses: actions/checkout@v4\n\n      - name: Construir Imagen Docker\n        run: docker build -t mi-app:${{ github.sha }} .\n\n      - name: Levantar Contenedor de Pruebas\n        run: docker run -d -p 8000:8000 --name test-app mi-app:${{ github.sha }}\n\n      - name: Esperar inicio del servicio\n        run: sleep 3\n\n      - name: Ejecutar Prueba de Salud\n        run: |\n          chmod +x check.sh\n          ./check.sh\nEOF',
+                                validation: 'Haz commit y push del archivo a GitHub. En la pestaña "Actions" del repositorio verás el pipeline ejecutándose en vivo.'
+                            }
                         ],
                         quiz: {
-                            question: '¿Cuándo se ejecuta un pipeline configurado con "on: [push]"?',
-                            options: ['Solo los viernes a medianoche', 'Cada vez que envías cambios de código al repositorio', 'Solo cuando el usuario paga la suscripción'],
+                            question: '¿Qué función cumple "${{ github.sha }}" en el script del pipeline?',
+                            options: [
+                                'Es una clave secreta para pagar la factura de GitHub',
+                                'Es el identificador único del commit de Git, usado para etiquetar la imagen exactamente con esa versión',
+                                'Es un comando que elimina las imágenes antiguas de Docker automáticamente'
+                            ],
                             correct: 1
                         },
                         nextSteps: [
-                            'Aprende a configurar pruebas unitarias automatizadas en tus pipelines.',
-                            'Integra escaneo de vulnerabilidades de seguridad con herramientas como Trivy o SonarQube.',
-                            'Explora GitHub Actions Marketplace para reusar acciones creadas por la comunidad.'
+                            'Configura GitHub Secrets para almacenar credenciales de forma segura sin exponerlas en el código.',
+                            'Añade un paso para publicar la imagen creada en un registro público como Docker Hub o Amazon ECR.',
+                            'Aprende a integrar linters (Flake8 o Black para Python) antes de la fase de construcción.'
                         ]
                     },
                     {
                         id: 'm4',
-                        title: '4. Introducción a la Nube (AWS & Cloud)',
-                        duration: '45 min',
-                        description: 'Aprende qué es la nube y cómo hospedar aplicaciones en infraestructura global accesible vía internet.',
-                        analogy: 'La nube es como rentar un departamento amueblado en lugar de construir una casa desde cero. Pagas solo por las noches que te quedas (recursos consumidos).',
+                        title: '4. Infraestructura e Inserción en la Nube (AWS EC2)',
+                        duration: '50 min',
+                        description: 'Aprenderás cómo funciona un servidor virtual en la nube (AWS EC2) y cómo preparar el entorno donde correrá el contenedor de nuestra aplicación.',
+                        prerequisites: 'Comprensión de conceptos básicos de redes (direcciones IP públicas vs privadas, puertos TCP). Opcional: Cuenta activa en AWS (AWS Free Tier).',
+                        concept: 'La nube no es más que la computadora de alguien más rentada a través de internet. En esta etapa entendemos las reglas de firewall (Security Groups) e instrucciones de inicio (User Data) necesarias para aprovisionar un servidor.',
                         steps: [
-                            { instruction: 'Entiende los servicios fundamentales de AWS:', code: '# EC2 = Servidores virtuales (Computo)\n# S3  = Almacenamiento de archivos\n# VPC = Tu red privada virtual en la nube', expected: 'Memoriza estos 3 pilares clave para cualquier entrevista Junior.' }
+                            {
+                                title: 'Entender el script de inicialización del servidor (user-data.sh)',
+                                explanation: 'Cuando una máquina en la nube inicia por primera vez, ejecuta un script de automatización para instalar dependencias sin intervención humana.',
+                                code: 'cat << \'EOF\' > user-data.sh\n#!/bin/bash\nsudo apt-get update -y\nsudo apt-get install -y docker.io\nsudo systemctl start docker\nsudo systemctl enable docker\nsudo docker run -d -p 80:8000 --restart always --name app-prod python:3.11-slim python -c \'import http.server,socketserver; socketserver.TCPServer(("",8000), http.server.SimpleHTTPRequestHandler).serve_forever()\'\nEOF',
+                                validation: 'Este script instala Docker, activa el servicio al arranque del servidor y ejecuta la aplicación expuesta en el puerto 80.'
+                            }
                         ],
                         quiz: {
-                            question: '¿Qué servicio de AWS se utiliza para almacenar archivos estáticos (como imágenes o documentos)?',
-                            options: ['AWS EC2', 'AWS S3', 'AWS Lambda'],
+                            question: '¿Qué garantiza la bandera "--restart always" al ejecutar un contenedor en producción dentro de un servidor EC2?',
+                            options: [
+                                'Que la máquina virtual cambie de dirección IP cada 5 minutos',
+                                'Que si el contenedor o el servidor se reinician, Docker vuelva a levantar el contenedor automáticamente',
+                                'Que el código fuente se actualice solo desde GitHub'
+                            ],
                             correct: 1
                         },
                         nextSteps: [
-                            'Crea una cuenta gratuita en AWS (Free Tier) y explora la consola.',
-                            'Aprende sobre conceptos de seguridad básica: IAM Users, Roles y Policies.',
-                            'Cursos recomendados: AWS Cloud Practitioner Essentials (Gratuito).'
+                            'Explora el concepto de VPC (Virtual Private Cloud) para aislar redes públicas y privadas.',
+                            'Aprende sobre balanceadores de carga (Application Load Balancer) para distribuir tráfico entre múltiples servidores.',
+                            'Estudia el servicio Amazon S3 para el almacenamiento de archivos estáticos o copias de seguridad.'
                         ]
                     },
                     {
                         id: 'm5',
-                        title: '5. Infraestructura como Código (IaC)',
+                        title: '5. Infraestructura como Código (IaC) con Terraform',
                         duration: '60 min',
-                        description: 'Escribe código para crear tus servidores y redes en lugar de hacer clics manuales en paneles de control.',
-                        analogy: 'IaC es como la receta de un chef. En lugar de explicarle verbalmente al cocinero cómo hacer el platillo cada vez, le das la receta exacta y el plato sale idéntico siempre.',
+                        description: 'Aprovisionaremos la infraestructura completa en AWS mediante archivos de código declarativos con Terraform.',
+                        prerequisites: 'Instala Terraform en tu equipo local. Verifica la instalación tecleando <code>terraform version</code> en tu terminal.',
+                        concept: 'En lugar de crear servidores haciendo clics manuales en la consola web de AWS (propenso a errores humanos), escribes archivos de texto que describen la infraestructura deseada. Terraform se encarga de crearla, actualizarla o destruirla.',
                         steps: [
-                            { instruction: 'Ejemplo de cómo se declara una red con Terraform (HCL):', code: 'resource "aws_s3_bucket" "mi_bucket" {\n  bucket = "mi-empresa-bucket-2026"\n}', expected: 'Con un solo comando (terraform apply), la nube creará ese recurso.' }
+                            {
+                                title: 'Escribir la plantilla principal de infraestructura (main.tf)',
+                                explanation: 'Creamos la definición del proveedor de nube (AWS), el grupo de seguridad (firewall) para abrir los puertos 22 (SSH) y 80 (HTTP), y la instancia del servidor virtual EC2.',
+                                code: 'cat << \'EOF\' > main.tf\nterraform {\n  required_providers {\n    aws = {\n      source  = "hashicorp/aws"\n      version = "~> 5.0"\n    }\n  }\n}\n\nprovider "aws" {\n  region = "us-west-2"\n}\n\nresource "aws_security_group" "sg_app" {\n  name        = "sg_devops_app"\n  description = "Permitir trafico HTTP y SSH"\n\n  ingress {\n    from_port   = 80\n    to_port     = 80\n    protocol    = "tcp"\n    cidr_blocks = ["0.0.0.0/0"]\n  }\n\n  ingress {\n    from_port   = 22\n    to_port     = 22\n    protocol    = "tcp"\n    cidr_blocks = ["0.0.0.0/0"]\n  }\n\n  egress {\n    from_port   = 0\n    to_port     = 0\n    protocol    = "-1"\n    cidr_blocks = ["0.0.0.0/0"]\n  }\n}\n\nresource "aws_instance" "servidor_app" {\n  ami           = "ami-0075013580f6322a1" # Ubuntu 22.04 LTS en us-west-2\n  instance_type = "t2.micro"\n  vpc_security_group_ids = [aws_security_group.sg_app.id]\n\n  user_data = <<EOF\n#!/bin/bash\nsudo apt-get update -y\nsudo apt-get install -y docker.io\nsudo systemctl start docker\nsudo docker run -d -p 80:8000 --name prod-app python:3.11-slim python -c "import http.server,socketserver; socketserver.TCPServer((\\\"\\\",8000), http.server.SimpleHTTPRequestHandler).serve_forever()"\nEOF\n\n  tags = {\n    Name = "Servidor-DevOps-Produccion"\n  }\n}\nEOF',
+                                validation: 'Verifica la sintaxis del archivo ejecutando "terraform fmt".'
+                            },
+                            {
+                                title: 'Inicializar el entorno de Terraform',
+                                explanation: 'Este comando descarga los complementos requeridos del proveedor de AWS.',
+                                code: 'terraform init',
+                                validation: 'Verás el mensaje "Terraform has been successfully initialized!".'
+                            },
+                            {
+                                title: 'Planificar y verificar los cambios',
+                                explanation: 'Terraform analiza la infraestructura existente contra el código y genera un reporte previo antes de aplicar cualquier cambio.',
+                                code: 'terraform plan',
+                                validation: 'El resultado te indicará "Plan: 2 to add, 0 to change, 0 to destroy".'
+                            }
                         ],
                         quiz: {
-                            question: '¿Cuál es la ventaja principal de Infraestructura como Código (IaC)?',
-                            options: ['Que permite crear servidores de forma repetible, automatizada y versionada', 'Que elimina la necesidad de pagar internet', 'Que programa las aplicaciones por ti'],
-                            correct: 0
+                            question: '¿Qué acción realiza el comando "terraform plan"?',
+                            options: [
+                                'Crea los servidores inmediatamente en la cuenta bancaria',
+                                'Compara el estado actual de la nube con el código declarativo y muestra los cambios antes de aplicarlos',
+                                'Borra todo el repositorio de GitHub de forma irreversible'
+                            ],
+                            correct: 1
                         },
                         nextSteps: [
-                            'Instala Terraform en tu equipo local.',
-                            'Aprende los comandos esenciales: terraform init, plan, apply, destroy.',
-                            'Revisa el Terraform Registry (registry.terraform.io) para usar módulos reutilizables.'
+                            'Aprende a gestionar el archivo de estado de Terraform (tfstate) en un bucket S3 remoto con bloqueo de tablas mediante DynamoDB.',
+                            'Investiga los módulos de Terraform para reutilizar código de infraestructura en entornos de Dev, Staging y Prod.',
+                            'Explora el concepto de GitOps utilizando herramientas como Atlantis o ArgoCD.'
                         ]
                     }
                 ]
