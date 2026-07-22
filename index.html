@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Zero-to-Hero | Curso Interactivo Gratuito</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased min-h-screen flex flex-col" x-data="courseApp()">
+
+    <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-emerald-400 flex items-center justify-center font-black text-slate-950 text-lg shadow-lg shadow-indigo-500/20">
+                    🚀
+                </div>
+                <div>
+                    <h1 class="font-bold text-white text-base leading-none">DevOps Junior Accelerator</h1>
+                    <p class="text-xs text-slate-400 mt-1">Por Miguel Ibarra · M.Ed & Senior DevOps</p>
+                </div>
+            </div>
+
+            <div class="hidden md:flex items-center gap-4 bg-slate-950 border border-slate-800 px-4 py-2 rounded-full">
+                <span class="text-xs text-slate-400 font-medium">Progreso del Curso:</span>
+                <div class="w-32 bg-slate-800 h-2 rounded-full overflow-hidden">
+                    <div class="bg-gradient-to-r from-indigo-500 to-emerald-400 h-full transition-all duration-300" :style="`width: ${progressPercentage}%`"></div>
+                </div>
+                <span class="text-xs font-bold text-emerald-400" x-text="`${progressPercentage}%`"></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex-1 max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 p-4 md:p-6">
+        
+        <aside class="lg:col-span-4 xl:col-span-3 space-y-3">
+            <div class="bg-slate-900/50 border border-slate-800/80 rounded-2xl p-4 sticky top-20">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4 px-2">Módulos del Curso</h2>
+                <nav class="space-y-1">
+                    <template x-for="(module, index) in modules" :key="module.id">
+                        <button 
+                            @click="currentModule = index"
+                            :class="currentModule === index ? 'bg-indigo-600/10 border-indigo-500/50 text-white' : 'hover:bg-slate-800/50 border-transparent text-slate-400'"
+                            class="w-full text-left p-3 rounded-xl border transition-all duration-200 flex items-center justify-between group">
+                            <div class="flex items-center gap-3">
+                                <span 
+                                    :class="completedModules.includes(module.id) ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' : 'bg-slate-800 text-slate-400'"
+                                    class="w-7 h-7 rounded-lg border text-xs font-bold flex items-center justify-center shrink-0"
+                                    x-text="completedModules.includes(module.id) ? '✓' : index + 1">
+                                </span>
+                                <div>
+                                    <p class="text-xs font-bold" x-text="module.title"></p>
+                                    <p class="text-[10px] text-slate-500" x-text="module.duration"></p>
+                                </div>
+                            </div>
+                        </button>
+                    </template>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="lg:col-span-8 xl:col-span-9 space-y-6">
+            
+            <template x-if="modules[currentModule]">
+                <div class="bg-slate-900/60 border border-slate-800 rounded-3xl p-6 md:p-8 space-y-8 backdrop-blur-sm shadow-xl">
+                    
+                    <div class="border-b border-slate-800 pb-6">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold" x-text="`Módulo ${currentModule + 1}`"></span>
+                            <span class="text-xs text-slate-500" x-text="modules[currentModule].duration"></span>
+                        </div>
+                        <h2 class="text-2xl md:text-3xl font-extrabold text-white" x-text="modules[currentModule].title"></h2>
+                        <p class="text-slate-400 text-sm mt-2 leading-relaxed" x-text="modules[currentModule].description"></p>
+                    </div>
+
+                    <div class="bg-indigo-950/30 border border-indigo-800/40 rounded-2xl p-5 space-y-2">
+                        <div class="flex items-center gap-2 text-indigo-400 font-bold text-sm">
+                            <i data-lucide="lightbulb" class="w-4 h-4"></i>
+                            <span>El concepto en simple (Sin Rodeos)</span>
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed" x-html="modules[currentModule].analogy"></p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                            <i data-lucide="terminal" class="w-5 h-5 text-emerald-400"></i>
+                            <span>Laboratorio Práctico</span>
+                        </h3>
+                        
+                        <div class="space-y-4">
+                            <template x-for="(step, sIndex) in modules[currentModule].steps" :key="sIndex">
+                                <div class="bg-slate-950 border border-slate-800/80 rounded-xl p-4 space-y-3">
+                                    <p class="text-xs font-semibold text-slate-300" x-text="`${sIndex + 1}. ${step.instruction}`"></p>
+                                    <template x-if="step.code">
+                                        <div class="relative group">
+                                            <pre class="bg-slate-900 text-emerald-300 p-3 rounded-lg text-xs overflow-x-auto border border-slate-800"><code x-text="step.code"></code></pre>
+                                        </div>
+                                    </template>
+                                    <p class="text-xs text-slate-500 italic" x-text="`💡 Resultado esperado: ${step.expected}`"></p>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-6 space-y-4">
+                        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+                            <span>Comprobación de Conocimiento</span>
+                        </h3>
+                        <p class="text-xs text-slate-400" x-text="modules[currentModule].quiz.question"></p>
+                        
+                        <div class="grid grid-cols-1 gap-2">
+                            <template x-for="(option, oIndex) in modules[currentModule].quiz.options" :key="oIndex">
+                                <button 
+                                    @click="selectQuizOption(oIndex)"
+                                    :class="quizAnswer === oIndex ? (oIndex === modules[currentModule].quiz.correct ? 'bg-emerald-500/20 border-emerald-500 text-emerald-300' : 'bg-red-500/20 border-red-500 text-red-300') : 'bg-slate-900 border-slate-800 text-slate-300 hover:bg-slate-800'"
+                                    class="text-left p-3 rounded-xl border text-xs font-medium transition-all">
+                                    <span x-text="option"></span>
+                                </button>
+                            </template>
+                        </div>
+                        <template x-if="quizFeedback">
+                            <p class="text-xs font-bold pt-2" :class="isQuizCorrect ? 'text-emerald-400' : 'text-red-400'" x-text="quizFeedback"></p>
+                        </template>
+                    </div>
+
+                    <div class="border-t border-slate-800 pt-6 space-y-3">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                            <i data-lucide="compass" class="w-4 h-4 text-indigo-400"></i>
+                            <span>¿Quieres profundizar más en este tema? (Ruta Senior)</span>
+                        </h3>
+                        <ul class="list-disc list-inside text-xs text-slate-400 space-y-1 pl-1">
+                            <template x-for="item in modules[currentModule].nextSteps" :key="item">
+                                <li x-text="item"></li>
+                            </template>
+                        </ul>
+                    </div>
+
+                    <div class="flex justify-end pt-4">
+                        <button 
+                            @click="toggleComplete(modules[currentModule].id)"
+                            :class="completedModules.includes(modules[currentModule].id) ? 'bg-slate-800 text-slate-400 border-slate-700' : 'bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold shadow-lg shadow-emerald-500/20'"
+                            class="px-6 py-3 rounded-xl border text-xs transition-all flex items-center gap-2">
+                            <span x-text="completedModules.includes(modules[currentModule].id) ? 'Marcar como Incompleto' : '¡Completar y Guardar Progreso!'"></span>
+                        </button>
+                    </div>
+
+                </div>
+            </template>
+        </main>
+    </div>
+
+    <footer class="border-t border-slate-800 bg-slate-950 py-6 text-center text-xs text-slate-500 mt-auto">
+        <p>© 2026 DevOps Junior Accelerator — Diseñado con metodología pedagógica por <strong>Miguel Ibarra</strong>.</p>
+        <p class="text-slate-600 mt-1">Alojado gratuitamente en GitHub Pages · Formando talento técnico en México y Latinoamérica.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Lucide.createIcons();
+        });
+
+        function courseApp() {
+            return {
+                currentModule: 0,
+                completedModules: JSON.parse(localStorage.getItem('devops_completed') || '[]'),
+                quizAnswer: null,
+                quizFeedback: '',
+                isQuizCorrect: false,
+
+                get progressPercentage() {
+                    return Math.round((this.completedModules.length / this.modules.length) * 100);
+                },
+
+                selectQuizOption(index) {
+                    this.quizAnswer = index;
+                    const correct = this.modules[this.currentModule].quiz.correct;
+                    if (index === correct) {
+                        this.isQuizCorrect = true;
+                        this.quizFeedback = '¡Correcto! Has captado la idea clave.';
+                    } else {
+                        this.isQuizCorrect = false;
+                        this.quizFeedback = 'Incorrecto. Revisa el concepto arriba e inténtalo de nuevo.';
+                    }
+                },
+
+                toggleComplete(id) {
+                    if (this.completedModules.includes(id)) {
+                        this.completedModules = this.completedModules.filter(item => item !== id);
+                    } else {
+                        this.completedModules.push(id);
+                    }
+                    localStorage.setItem('devops_completed', JSON.stringify(this.completedModules));
+                },
+
+                modules: [
+                    {
+                        id: 'm1',
+                        title: '1. Linux & Terminal para la Automatización',
+                        duration: '45 min',
+                        description: 'Fundamentos de la línea de comandos sin miedo. Todo el software del mundo corre en servidores Linux.',
+                        analogy: 'Piensa en la terminal como chatear directamente con el motor de la computadora sin la interfaz gráfica estorbando. En lugar de hacer 10 clics, ejecutas una instrucción directa.',
+                        steps: [
+                            { instruction: 'Crea una carpeta de proyecto y entra en ella desde la terminal:', code: 'mkdir mi-proyecto && cd mi-proyecto', expected: 'Tu terminal ahora estará ubicada dentro de "mi-proyecto".' },
+                            { instruction: 'Crea un archivo de texto con contenido en una sola línea:', code: 'echo "Servidor activo v1.0" > estado.txt', expected: 'Se creará el archivo estado.txt silenciosamente.' },
+                            { instruction: 'Lee el contenido del archivo:', code: 'cat estado.txt', expected: 'Verás en pantalla: "Servidor activo v1.0".' }
+                        ],
+                        quiz: {
+                            question: '¿Qué comando usas para crear una carpeta y moverte dentro de ella?',
+                            options: ['mkdir carpeta && cd carpeta', 'create carpeta && move carpeta', 'echo carpeta > cd'],
+                            correct: 0
+                        },
+                        nextSteps: [
+                            'Aprende sobre permisos de archivos (chmod, chown).',
+                            'Investiga la manipulación de flujos de texto avanzados con grep, sed y awk.',
+                            'Lectura sugerida: "The Linux Command Line" de William Shotts.'
+                        ]
+                    },
+                    {
+                        id: 'm2',
+                        title: '2. Empaquetado con Docker (Contenedores)',
+                        duration: '60 min',
+                        description: 'Elimina para siempre el "en mi computadora sí funcionaba". Empaca tu aplicación con todas sus dependencias.',
+                        analogy: 'Un contenedor es como un contenedor de barco real: no importa qué tenga adentro (bananas, autos, ropa), el barco (servidor) solo sabe cómo cargarlo y moverlo de forma estándar.',
+                        steps: [
+                            { instruction: 'Descarga y corre un servidor web NGINX básico en segundos:', code: 'docker run -d -p 8080:80 --name mi-web nginx', expected: 'Docker descargará la imagen y ejecutará el servidor.' },
+                            { instruction: 'Verifica los contenedores activos en tu sistema:', code: 'docker ps', expected: 'Verás el contenedor "mi-web" corriendo en el puerto 8080.' },
+                            { instruction: 'Detén y elimina el contenedor de prueba:', code: 'docker stop mi-web && docker rm mi-web', expected: 'El contenedor se apaga y se limpia el sistema.' }
+                        ],
+                        quiz: {
+                            question: '¿Cuál es la principal ventaja de un contenedor Docker?',
+                            options: ['Que hace que el internet vaya más rápido', 'Que empaqueta la app con sus dependencias para correr igual en cualquier lado', 'Que reemplaza por completo a los lenguajes de programación'],
+                            correct: 1
+                        },
+                        nextSteps: [
+                            'Aprende a escribir tu propio Dockerfile para aplicaciones en Python o Node.js.',
+                            'Explora Docker Compose para levantar base de datos + app en un solo comando.',
+                            'Documentación oficial: docs.docker.com/get-started'
+                        ]
+                    },
+                    {
+                        id: 'm3',
+                        title: '3. CI/CD con GitHub Actions',
+                        duration: '50 min',
+                        description: 'Automatiza el proceso de probar tu código e integrarlo cada vez que haces un cambio en GitHub.',
+                        analogy: 'CI/CD es como una banda transportadora en una fábrica automotriz. Cada vez que pones una pieza (código), robots automatizados revisan que no tenga fallas antes de poner el auto a rodar.',
+                        steps: [
+                            { instruction: 'Crea la estructura de carpetas necesaria en tu repositorio:', code: 'mkdir -p .github/workflows', expected: 'Carpeta lista para recibir tus flujos automatizados.' },
+                            { instruction: 'Crea un archivo llamado hello.yml dentro de esa carpeta con este contenido:', code: 'name: Mi Primer CI\non: [push]\njobs:\n  saludo:\n    runs-on: ubuntu-latest\n    steps:\n      - run: echo "¡Pipeline ejecutado con éxito!"', expected: 'Cada push a GitHub ejecutará este flujo automáticamente.' }
+                        ],
+                        quiz: {
+                            question: '¿Cuándo se ejecuta un pipeline configurado con "on: [push]"?',
+                            options: ['Solo los viernes a medianoche', 'Cada vez que envías cambios de código al repositorio', 'Solo cuando el usuario paga la suscripción'],
+                            correct: 1
+                        },
+                        nextSteps: [
+                            'Aprende a configurar pruebas unitarias automatizadas en tus pipelines.',
+                            'Integra escaneo de vulnerabilidades de seguridad con herramientas como Trivy o SonarQube.',
+                            'Explora GitHub Actions Marketplace para reusar acciones creadas por la comunidad.'
+                        ]
+                    },
+                    {
+                        id: 'm4',
+                        title: '4. Introducción a la Nube (AWS & Cloud)',
+                        duration: '45 min',
+                        description: 'Aprende qué es la nube y cómo hospedar aplicaciones en infraestructura global accesible vía internet.',
+                        analogy: 'La nube es como rentar un departamento amueblado en lugar de construir una casa desde cero. Pagas solo por las noches que te quedas (recursos consumidos).',
+                        steps: [
+                            { instruction: 'Entiende los servicios fundamentales de AWS:', code: '# EC2 = Servidores virtuales (Computo)\n# S3  = Almacenamiento de archivos\n# VPC = Tu red privada virtual en la nube', expected: 'Memoriza estos 3 pilares clave para cualquier entrevista Junior.' }
+                        ],
+                        quiz: {
+                            question: '¿Qué servicio de AWS se utiliza para almacenar archivos estáticos (como imágenes o documentos)?',
+                            options: ['AWS EC2', 'AWS S3', 'AWS Lambda'],
+                            correct: 1
+                        },
+                        nextSteps: [
+                            'Crea una cuenta gratuita en AWS (Free Tier) y explora la consola.',
+                            'Aprende sobre conceptos de seguridad básica: IAM Users, Roles y Policies.',
+                            'Cursos recomendados: AWS Cloud Practitioner Essentials (Gratuito).'
+                        ]
+                    },
+                    {
+                        id: 'm5',
+                        title: '5. Infraestructura como Código (IaC)',
+                        duration: '60 min',
+                        description: 'Escribe código para crear tus servidores y redes en lugar de hacer clics manuales en paneles de control.',
+                        analogy: 'IaC es como la receta de un chef. En lugar de explicarle verbalmente al cocinero cómo hacer el platillo cada vez, le das la receta exacta y el plato sale idéntico siempre.',
+                        steps: [
+                            { instruction: 'Ejemplo de cómo se declara una red con Terraform (HCL):', code: 'resource "aws_s3_bucket" "mi_bucket" {\n  bucket = "mi-empresa-bucket-2026"\n}', expected: 'Con un solo comando (terraform apply), la nube creará ese recurso.' }
+                        ],
+                        quiz: {
+                            question: '¿Cuál es la ventaja principal de Infraestructura como Código (IaC)?',
+                            options: ['Que permite crear servidores de forma repetible, automatizada y versionada', 'Que elimina la necesidad de pagar internet', 'Que programa las aplicaciones por ti'],
+                            correct: 0
+                        },
+                        nextSteps: [
+                            'Instala Terraform en tu equipo local.',
+                            'Aprende los comandos esenciales: terraform init, plan, apply, destroy.',
+                            'Revisa el Terraform Registry (registry.terraform.io) para usar módulos reutilizables.'
+                        ]
+                    }
+                ]
+            }
+        }
+    </script>
+</body>
+</html>
